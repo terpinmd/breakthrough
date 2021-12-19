@@ -1,20 +1,20 @@
-import React, {useState, useEffect} from 'react'
-import {Link, withPrefix} from 'gatsby'
-import {Menu, Container, Icon} from 'semantic-ui-react'
-import ShoppingCartIcon from './ShoppingCartIcon'
+import React, { useState, useEffect } from "react";
+import { Link, withPrefix } from "gatsby";
+import { Menu, Container, Icon } from "semantic-ui-react";
+import ShoppingCartIcon from "./ShoppingCartIcon";
 
-const DesktopMenu = ({location: {pathname}, token, cartCount, signout}) => {
-  const [activeItem, setActiveItem] = useState(pathname)
+const DesktopMenu = ({ location: { pathname }, token, cartCount, signout }) => {
+  const [activeItem, setActiveItem] = useState(pathname);
 
   useEffect(() => {
-    setActiveItem(pathname)
-  }, [pathname])
+    setActiveItem(pathname);
+  }, [pathname]);
 
   return (
     <Menu size="huge" borderless pointing>
       <Container text>
         <Menu.Item
-          active={activeItem === withPrefix('/')}
+          active={activeItem === withPrefix("/")}
           as={Link}
           to="/"
           header
@@ -26,7 +26,7 @@ const DesktopMenu = ({location: {pathname}, token, cartCount, signout}) => {
             <Menu.Item
               as={Link}
               to="/myaccount/"
-              active={activeItem === withPrefix('/myaccount/')}
+              active={activeItem === withPrefix("/myaccount/")}
             >
               <Icon name="user" />
               My Account
@@ -35,7 +35,7 @@ const DesktopMenu = ({location: {pathname}, token, cartCount, signout}) => {
             <Menu.Item
               as={Link}
               to="/cart/"
-              active={activeItem === withPrefix('/cart/')}
+              active={activeItem === withPrefix("/cart/")}
             >
               <ShoppingCartIcon cartCount={cartCount} name="Cart" />
             </Menu.Item>
@@ -45,21 +45,21 @@ const DesktopMenu = ({location: {pathname}, token, cartCount, signout}) => {
             <Menu.Item
               as={Link}
               to="/register/"
-              active={activeItem === withPrefix('/register/')}
+              active={activeItem === withPrefix("/register/")}
             >
               Sign up
             </Menu.Item>
             <Menu.Item
               as={Link}
               to="/login/"
-              active={activeItem === withPrefix('/login/')}
+              active={activeItem === withPrefix("/login/")}
             >
               Sign in
             </Menu.Item>
             <Menu.Item
               as={Link}
               to="/cart/"
-              active={activeItem === withPrefix('/cart/')}
+              active={activeItem === withPrefix("/cart/")}
             >
               <ShoppingCartIcon cartCount={cartCount} name="Cart" />
             </Menu.Item>
@@ -67,7 +67,7 @@ const DesktopMenu = ({location: {pathname}, token, cartCount, signout}) => {
         )}
       </Container>
     </Menu>
-  )
-}
+  );
+};
 
-export default DesktopMenu
+export default DesktopMenu;

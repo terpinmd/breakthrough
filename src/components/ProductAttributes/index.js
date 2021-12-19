@@ -1,8 +1,15 @@
 /* eslint-disable camelcase */
-import React from 'react'
-import {Header, Divider, Table} from 'semantic-ui-react'
+import React from "react";
+import { Header, Divider, Table } from "semantic-ui-react";
 
-export default ({description, material, max_watt, bulb_qty, finish, bulb}) => (
+export default ({
+  description,
+  material,
+  max_watt,
+  bulb_qty,
+  finish,
+  bulb
+}) => (
   <div>
     <Header as="h3">About this product</Header>
     <p>{description}</p>
@@ -10,7 +17,7 @@ export default ({description, material, max_watt, bulb_qty, finish, bulb}) => (
     <Divider />
 
     <Table celled>
-      <Table.Header style={{background: '#f9fafb'}}>
+      <Table.Header style={{ background: "#f9fafb" }}>
         <Table.Row>
           <Table.HeaderCell colSpan="2">Attributes</Table.HeaderCell>
         </Table.Row>
@@ -40,4 +47,4 @@ export default ({description, material, max_watt, bulb_qty, finish, bulb}) => (
       </Table.Body>
     </Table>
   </div>
-)
+);

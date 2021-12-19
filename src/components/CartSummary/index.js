@@ -1,12 +1,12 @@
-import React from 'react'
-import StripeCheckout from 'react-stripe-checkout'
-import {Button, Segment, Divider} from 'semantic-ui-react'
+import React from "react";
+import StripeCheckout from "react-stripe-checkout";
+import { Button, Segment, Divider } from "semantic-ui-react";
 
 export default ({
   handleCheckout,
   display_price: {
-    with_tax: {amount, currency, formatted},
-  },
+    with_tax: { amount, currency, formatted }
+  }
 }) => (
   <div>
     <Divider />
@@ -18,8 +18,8 @@ export default ({
       <StripeCheckout
         name="Gatsby Store"
         amount={amount}
-        currency={currency || 'GBP'}
-        stripeKey={process.env.STRIPE_PUBLISHABLE_KEY || ''}
+        currency={currency || "GBP"}
+        stripeKey={process.env.STRIPE_PUBLISHABLE_KEY || ""}
         shippingAddress={false}
         billingAddress
         zipCode
@@ -33,4 +33,4 @@ export default ({
       </StripeCheckout>
     </Segment>
   </div>
-)
+);

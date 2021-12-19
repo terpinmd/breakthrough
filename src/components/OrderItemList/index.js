@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
-import React from 'react'
-import {Link} from 'gatsby'
-import {Header, Loader, Message, Label, Segment} from 'semantic-ui-react'
+import React from "react";
+import { Link } from "gatsby";
+import { Header, Loader, Message, Label, Segment } from "semantic-ui-react";
 
-export default ({orders, loading}) => {
-  if (loading) return <Loader active inline="centered" />
+export default ({ orders, loading }) => {
+  if (loading) return <Loader active inline="centered" />;
 
   if (orders.length === 0) {
     return (
@@ -15,7 +15,7 @@ export default ({orders, loading}) => {
           <Link to="/"> Go shopping.</Link>
         </p>
       </Message>
-    )
+    );
   }
 
   return (
@@ -29,21 +29,21 @@ export default ({orders, loading}) => {
           shipping_address,
           status,
           meta,
-          order_items,
-        } = order
-        const completed = status === 'complete'
-        const price = meta.display_price.with_tax.formatted
+          order_items
+        } = order;
+        const completed = status === "complete";
+        const price = meta.display_price.with_tax.formatted;
 
         return (
           <Segment.Group key={id}>
             <Segment>
               <Header as="h4">{price}</Header>
               <Label
-                icon={completed ? 'check' : null}
-                color={completed ? 'green' : null}
+                icon={completed ? "check" : null}
+                color={completed ? "green" : null}
                 content={status.toUpperCase()}
               />
-              <pre>{JSON.stringify(order_items, '\t', 2)}</pre>
+              <pre>{JSON.stringify(order_items, "\t", 2)}</pre>
             </Segment>
             <Segment.Group horizontal>
               <Segment>
@@ -80,8 +80,8 @@ export default ({orders, loading}) => {
               </Segment>
             </Segment.Group>
           </Segment.Group>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};

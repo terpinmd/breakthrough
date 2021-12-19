@@ -1,12 +1,14 @@
-import React from 'react'
-import {graphql, useStaticQuery} from 'gatsby'
-import get from 'lodash/get'
-import {Image, Header} from 'semantic-ui-react'
-import ProductList from '../components/ProductList'
-import SEO from '../components/SEO'
-import Layout from '../components/Layout'
+import React from "react";
+import { graphql, useStaticQuery } from "gatsby";
+import get from "lodash/get";
+import { Image, Header } from "semantic-ui-react";
+import ProductList from "../components/ProductList";
 
-const StoreIndex = ({location}) => {
+import SEO from "../components/SEO";
+import Layout from "../components/Layout";
+import HomePage from "../components/Content/HomePage";
+
+const StoreIndex = ({ location }) => {
   const data = useStaticQuery(graphql`
     query IndexQuery {
       site {
@@ -41,32 +43,38 @@ const StoreIndex = ({location}) => {
         }
       }
     }
-  `)
+  `);
 
-  const siteTitle = get(data, 'site.siteMetadata.title')
-  const products = get(data, 'allMoltinProduct.edges')
-  const filterProductsWithoutImages = products.filter(v => v.node.mainImageHref)
+  const siteTitle = get(data, "site.siteMetadata.title");
+  const products = get(data, "allMoltinProduct.edges");
+  const filterProductsWithoutImages = products.filter(
+    v => v.node.mainImageHref
+  );
   return (
     <Layout location={location}>
       <SEO title={siteTitle} />
+
       <Header
         as="h3"
         icon
         textAlign="center"
         style={{
-          marginBottom: '2em',
+          marginBottom: "2em"
         }}
       >
         <Header.Content
           style={{
-            width: '60%',
-            margin: '0 auto',
+            width: "60%",
+            margin: "0 auto"
           }}
         ></Header.Content>
       </Header>
-      <ProductList products={filterProductsWithoutImages} />
-    </Layout>
-  )
-}
 
-export default StoreIndex
+      <HomePage />
+
+      {/* <ProductList products={filterProductsWithoutImages} /> */}
+    </Layout>
+  );
+};
+
+export default StoreIndex;

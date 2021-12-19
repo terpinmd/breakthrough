@@ -83,7 +83,7 @@
     "dev": "gatsby develop",
     "lint": "eslint . --ext .js,.jsx --ignore-path .gitignore",
     "lint:fix": "eslint . --ext .js,.jsx --fix --ignore-path .gitignore",
-    "format": "prettier --write \"src/**/*.{js,jsx}\"",
+    "format": "prettier --write \"src/**/*.{js,jsx,tsx,ts}\"",
     "develop": "rimraf .cache && gatsby develop",
     "build": "rimraf .cache && gatsby build",
     "deploy": "rimraf .cache && gatsby build --prefix-paths && gh-pages -d public",

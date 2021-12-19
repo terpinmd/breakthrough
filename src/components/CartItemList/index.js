@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
-import React from 'react'
-import {Link} from 'gatsby'
-import {Item, Button, Loader, Message, Responsive} from 'semantic-ui-react'
+import React from "react";
+import { Link } from "gatsby";
+import { Item, Button, Loader, Message, Responsive } from "semantic-ui-react";
 
-export default ({items, removeFromCart, loading, completed}) => {
-  if (loading) return <Loader active inline="centered" />
+export default ({ items, removeFromCart, loading, completed }) => {
+  if (loading) return <Loader active inline="centered" />;
 
   if (completed)
     return (
@@ -12,7 +12,7 @@ export default ({items, removeFromCart, loading, completed}) => {
         <Message.Header>Your placed!</Message.Header>
         <p>Congratulations. Your order and payment has been accepted.</p>
       </Message>
-    )
+    );
 
   if (items.length === 0)
     return (
@@ -22,28 +22,28 @@ export default ({items, removeFromCart, loading, completed}) => {
           You will need to add some items to the cart before you can checkout.
         </p>
       </Message>
-    )
+    );
   const mapCartItemsToItems = items =>
-    items.map(({id, product_id, name, quantity, meta, image}) => {
-      const price = meta.display_price.with_tax.unit.formatted || ''
-      const imageUrl = image.href || '/static/moltin-light-hex.svg'
+    items.map(({ id, product_id, name, quantity, meta, image }) => {
+      const price = meta.display_price.with_tax.unit.formatted || "";
+      const imageUrl = image.href || "/static/moltin-light-hex.svg";
 
       const DesktopItemImage = () => (
         <Item.Image
           src={imageUrl}
           alt={name}
           size="small"
-          style={{background: '#f2f2f2'}}
+          style={{ background: "#f2f2f2" }}
         />
-      )
+      );
       const MobileItemImage = () => (
         <Item.Image
           src={imageUrl}
           alt={name}
           size="small"
-          style={{background: 'none'}}
+          style={{ background: "none" }}
         />
-      )
+      );
 
       return {
         childKey: id,
@@ -66,7 +66,7 @@ export default ({items, removeFromCart, loading, completed}) => {
           </>
         ),
         meta: `${quantity}x ${price}`,
-        description: 'Some more information goes here....',
+        description: "Some more information goes here....",
         extra: (
           <Button
             basic
@@ -74,8 +74,8 @@ export default ({items, removeFromCart, loading, completed}) => {
             floated="right"
             onClick={() => removeFromCart(id)}
           />
-        ),
-      }
-    })
-  return <Item.Group divided items={mapCartItemsToItems(items)} />
-}
+        )
+      };
+    });
+  return <Item.Group divided items={mapCartItemsToItems(items)} />;
+};

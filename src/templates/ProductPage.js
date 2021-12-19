@@ -1,19 +1,19 @@
 /* eslint-disable */
-import React from 'react'
-import {graphql} from 'gatsby'
-import SEO from '../components/SEO'
-import get from 'lodash/get'
-import ProductSummary from '../components/ProductSummary'
-import ProductAttributes from '../components/ProductAttributes'
-import Layout from '../components/Layout'
+import React from "react";
+import { graphql } from "gatsby";
+import SEO from "../components/SEO";
+import get from "lodash/get";
+import ProductSummary from "../components/ProductSummary";
+import ProductAttributes from "../components/ProductAttributes";
+import Layout from "../components/Layout";
 
 class ProductPageTemplate extends React.PureComponent {
   render() {
-    const productInfo = get(this, 'props.data.allMoltinProduct')
-    const data = productInfo.edges[0].node
-    const slug = data.slug
-    const image = get(data, 'mainImageHref')
-    const sizes = get(data, 'mainImage.childImageSharp.sizes')
+    const productInfo = get(this, "props.data.allMoltinProduct");
+    const data = productInfo.edges[0].node;
+    const slug = data.slug;
+    const image = get(data, "mainImageHref");
+    const sizes = get(data, "mainImage.childImageSharp.sizes");
     const product = {
       ...data,
       id: data.id,
@@ -21,10 +21,10 @@ class ProductPageTemplate extends React.PureComponent {
       mainImage: data.mainImage,
       header: data.name,
       meta: data.meta,
-      sku: data.sku,
-    }
+      sku: data.sku
+    };
 
-    if (!sizes) return null
+    if (!sizes) return null;
 
     return (
       <Layout location={this.props.location}>
@@ -32,15 +32,15 @@ class ProductPageTemplate extends React.PureComponent {
         <ProductSummary {...product} />
         <ProductAttributes {...product} />
       </Layout>
-    )
+    );
   }
 }
 
-export default ProductPageTemplate
+export default ProductPageTemplate;
 
 export const pageQuery = graphql`
   query ProductsQuery($id: String!) {
-    allMoltinProduct(filter: {id: {eq: $id}}) {
+    allMoltinProduct(filter: { id: { eq: $id } }) {
       edges {
         node {
           id
@@ -74,4 +74,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

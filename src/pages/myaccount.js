@@ -1,37 +1,37 @@
-import React, {useState, useEffect, useContext} from 'react'
-import {navigate} from 'gatsby'
-import SEO from '../components/SEO'
-import OrderItemList from '../components/OrderItemList'
-import Layout from '../components/Layout'
-import AuthContext from '../components/Context/AuthContext'
+import React, { useState, useEffect, useContext } from "react";
+import { navigate } from "gatsby";
+import SEO from "../components/SEO";
+import OrderItemList from "../components/OrderItemList";
+import Layout from "../components/Layout";
+import AuthContext from "../components/Context/AuthContext";
 
-import {getOrders} from '../../lib/moltin'
+import { getOrders } from "../../lib/moltin";
 
-const MyAccount = ({location}) => {
-  const [loading, setLoading] = useState(true)
-  const [orders, setOrders] = useState([])
-  const [included, setIncluded] = useState([])
-  const [meta, setMeta] = useState({})
-  const {token} = useContext(AuthContext)
+const MyAccount = ({ location }) => {
+  const [loading, setLoading] = useState(true);
+  const [orders, setOrders] = useState([]);
+  const [included, setIncluded] = useState([]);
+  const [meta, setMeta] = useState({});
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
     if (!token) {
-      navigate('/login/')
+      navigate("/login/");
     }
     getOrders(token)
-      .then(({data, meta, included}) => {
+      .then(({ data, meta, included }) => {
         const orders = data.map(order => ({
-          ...order,
-        }))
-        setLoading(false)
-        setMeta(meta)
-        setOrders(orders)
-        setIncluded(included)
+          ...order
+        }));
+        setLoading(false);
+        setMeta(meta);
+        setOrders(orders);
+        setIncluded(included);
       })
       .catch(error => {
-        console.log(error)
-      })
-  }, [token])
+        console.log(error);
+      });
+  }, [token]);
 
   return (
     <Layout location={location}>
@@ -43,6 +43,6 @@ const MyAccount = ({location}) => {
         included={included}
       />
     </Layout>
-  )
-}
-export default MyAccount
+  );
+};
+export default MyAccount;

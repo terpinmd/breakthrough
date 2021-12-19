@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react'
-import {Link, withPrefix} from 'gatsby'
+import React, { useState, useEffect } from "react";
+import { Link, withPrefix } from "gatsby";
 import {
   Menu,
   Container,
@@ -7,11 +7,11 @@ import {
   Portal,
   Segment,
   Divider,
-  Button,
-} from 'semantic-ui-react'
-import styled from 'styled-components'
-import ShoppingCartIcon from './ShoppingCartIcon'
-import Logo from './Logo'
+  Button
+} from "semantic-ui-react";
+import styled from "styled-components";
+import ShoppingCartIcon from "./ShoppingCartIcon";
+import Logo from "./Logo";
 
 const StyledLink = styled(Link)`
   font-weight: bold;
@@ -20,7 +20,7 @@ const StyledLink = styled(Link)`
   &:hover {
     text-decoration: underline;
   }
-`
+`;
 
 const BurgerButton = styled(Button)`
   &&& {
@@ -29,7 +29,7 @@ const BurgerButton = styled(Button)`
     box-shadow: 0 0 0 1px transparent inset,
       0 0 0 0 rgba(34, 36, 38, 0.15) inset;
   }
-`
+`;
 const CloseButton = styled(BurgerButton)`
   &&& {
     position: absolute;
@@ -40,7 +40,7 @@ const CloseButton = styled(BurgerButton)`
     width: 2em;
     height: 2em;
   }
-`
+`;
 
 const StyledSegment = styled(Segment)`
   &&& {
@@ -51,7 +51,7 @@ const StyledSegment = styled(Segment)`
     width: 100vw;
     height: 110vh;
   }
-`
+`;
 
 const StyledContainer = styled.div`
   &&& {
@@ -59,25 +59,25 @@ const StyledContainer = styled.div`
     text-align: center;
     position: relative;
   }
-`
+`;
 
 const StyledDivider = styled(Divider)`
   &&& {
     margin: 2em;
   }
-`
+`;
 
-const MobileMenu = ({location: {pathname}, token, cartCount, signout}) => {
-  const [activeItem, setActiveItem] = useState(pathname)
-  const [open, setOpen] = useState(false)
+const MobileMenu = ({ location: { pathname }, token, cartCount, signout }) => {
+  const [activeItem, setActiveItem] = useState(pathname);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    setActiveItem(pathname)
-  }, [pathname])
+    setActiveItem(pathname);
+  }, [pathname]);
 
-  const handleClick = () => setOpen(!open)
+  const handleClick = () => setOpen(!open);
 
-  const handleClose = () => setOpen(false)
+  const handleClose = () => setOpen(false);
 
   return (
     <Menu size="huge" borderless pointing>
@@ -86,7 +86,7 @@ const MobileMenu = ({location: {pathname}, token, cartCount, signout}) => {
           as={Link}
           to="/"
           header
-          active={activeItem === withPrefix('/')}
+          active={activeItem === withPrefix("/")}
         >
           <Logo />
           Store
@@ -95,7 +95,7 @@ const MobileMenu = ({location: {pathname}, token, cartCount, signout}) => {
           <Menu.Item
             as={Link}
             to="/cart/"
-            active={activeItem === withPrefix('/cart/')}
+            active={activeItem === withPrefix("/cart/")}
           >
             <ShoppingCartIcon cartCount={cartCount} name="" />
           </Menu.Item>
@@ -127,7 +127,7 @@ const MobileMenu = ({location: {pathname}, token, cartCount, signout}) => {
               </StyledLink>
               <StyledDivider />
               <StyledLink to="/cart/" onClick={handleClose}>
-                {`Shopping Cart ${cartCount ? `(${cartCount})` : ''}`}
+                {`Shopping Cart ${cartCount ? `(${cartCount})` : ""}`}
               </StyledLink>
               <StyledDivider />
               {token
@@ -138,7 +138,7 @@ const MobileMenu = ({location: {pathname}, token, cartCount, signout}) => {
                     <StyledDivider key={2} />,
                     <StyledLink to="/" onClick={signout} key={3}>
                       Sign out
-                    </StyledLink>,
+                    </StyledLink>
                   ]
                 : [
                     <StyledLink to="/register/" onClick={handleClose} key={1}>
@@ -147,14 +147,14 @@ const MobileMenu = ({location: {pathname}, token, cartCount, signout}) => {
                     <StyledDivider key={2} />,
                     <StyledLink to="/login/" onClick={handleClose} key={3}>
                       Sign In
-                    </StyledLink>,
+                    </StyledLink>
                   ]}
             </StyledContainer>
           </StyledSegment>
         </Portal>
       </Container>
     </Menu>
-  )
-}
+  );
+};
 
-export default MobileMenu
+export default MobileMenu;

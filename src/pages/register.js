@@ -1,56 +1,63 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-use-before-define */
 
-import React, {useState, useContext} from 'react'
-import {navigate} from 'gatsby'
-import {Header, Form, Input, Button, Segment, Message} from 'semantic-ui-react'
-import SEO from '../components/SEO'
-import AuthContext from '../components/Context/AuthContext'
-import {register} from '../../lib/moltin'
-import Layout from '../components/Layout'
-import useForm from '../components/Hooks/useForm'
+import React, { useState, useContext } from "react";
+import { navigate } from "gatsby";
+import {
+  Header,
+  Form,
+  Input,
+  Button,
+  Segment,
+  Message
+} from "semantic-ui-react";
+import SEO from "../components/SEO";
+import AuthContext from "../components/Context/AuthContext";
+import { register } from "../../lib/moltin";
+import Layout from "../components/Layout";
+import useForm from "../components/Hooks/useForm";
 
-const Register = ({location}) => {
-  const [loading, setLoading] = useState(false)
-  const [apiError, setApiError] = useState([])
-  const {updateToken} = useContext(AuthContext)
+const Register = ({ location }) => {
+  const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState([]);
+  const { updateToken } = useContext(AuthContext);
 
   const formRegister = () => {
-    setLoading(true)
+    setLoading(true);
     register({
       name: values.name,
       email: values.email,
-      password: values.password,
+      password: values.password
     })
       .then(data => {
-        const {id, token} = data
-        localStorage.setItem('customerToken', token)
-        localStorage.setItem('mcustomer', id)
-        updateToken()
-        navigate('/myaccount/')
+        const { id, token } = data;
+        localStorage.setItem("customerToken", token);
+        localStorage.setItem("mcustomer", id);
+        updateToken();
+        navigate("/myaccount/");
       })
       .catch(e => {
-        console.log(e)
-        setLoading(false)
-        setApiError(e.errors || e)
-      })
-  }
+        console.log(e);
+        setLoading(false);
+        setApiError(e.errors || e);
+      });
+  };
 
-  const {values, handleChange, handleSubmit, errors} = useForm(
+  const { values, handleChange, handleSubmit, errors } = useForm(
     formRegister,
-    validate,
-  )
+    validate
+  );
 
   const handleErrors = errors => {
     if (!Array.isArray(errors) && !errors.length > 0) {
       return (
         <Message error header="Sorry" content="Cannot register at this time." />
-      )
+      );
     }
     return errors.map(e => (
       <Message error header={e.title} content={e.detail} key={e.status} />
-    ))
-  }
+    ));
+  };
 
   return (
     <Layout location={location}>
@@ -67,10 +74,10 @@ const Register = ({location}) => {
               name="name"
               autoFocus
               onChange={handleChange}
-              value={values.name || ''}
+              value={values.name || ""}
             />
           </Form.Field>
-          {errors.name && <p style={{color: 'red'}}>{errors.name}</p>}
+          {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
 
           <Form.Field>
             <label htmlFor="email">Email</label>
@@ -80,10 +87,10 @@ const Register = ({location}) => {
               name="email"
               type="email"
               onChange={handleChange}
-              value={values.email || ''}
+              value={values.email || ""}
             />
           </Form.Field>
-          {errors.email && <p style={{color: 'red'}}>{errors.email}</p>}
+          {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
           <Form.Field>
             <label htmlFor="password">Password</label>
             <Input
@@ -92,33 +99,33 @@ const Register = ({location}) => {
               name="password"
               type="password"
               onChange={handleChange}
-              value={values.password || ''}
+              value={values.password || ""}
             />
           </Form.Field>
-          {errors.password && <p style={{color: 'red'}}>{errors.password}</p>}
+          {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
           <Button type="submit" color="orange">
             Register
           </Button>
         </Segment>
       </Form>
     </Layout>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
 
 const validate = values => {
-  const errors = {}
+  const errors = {};
   if (!values.email) {
-    errors.email = 'Email address is required'
+    errors.email = "Email address is required";
   } else if (!/\S+@\S+\.\S+/.test(values.email)) {
-    errors.email = 'Email address is invalid'
+    errors.email = "Email address is invalid";
   }
   if (!values.password) {
-    errors.password = 'Password is required'
+    errors.password = "Password is required";
   }
   if (!values.name) {
-    errors.name = 'A name is required'
+    errors.name = "A name is required";
   }
-  return errors
-}
+  return errors;
+};
